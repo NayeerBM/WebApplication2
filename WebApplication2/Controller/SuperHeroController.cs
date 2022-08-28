@@ -23,30 +23,19 @@ namespace WebApplication2.Controller
         [HttpGet]
         public async Task<IHttpActionResult> Get()
         {
-            /*var request = HttpContext.Current.Request;
-            var authHeader = request.Headers["Authorization"];
-            var authHeaderVal = AuthenticationHeaderValue.Parse(authHeader);
-            var authHeaderParam = authHeaderVal.Parameter;
-            test(authHeaderParam);
-            
-            var n = "test";*/
             return Ok(supe);
         }
         public async Task<IHttpActionResult> Get(int id)
         {
-            var hero= supe.Find(r=>r.id==id);
-            return Ok(hero);
-        }
-        public void test(string credentials)
-        {
-            var encoding = Encoding.GetEncoding("utf-8");
-            credentials = encoding.GetString(Convert.FromBase64String(credentials));
-
-            int separator = credentials.IndexOf(':');
-            string name = credentials.Substring(0, separator);
-            string password = credentials.Substring(separator + 1);
-            var test = "";
-
+            var hero = (object)"";
+            await Task.Run(() =>
+            {
+                hero = supe.Find(r => r.id == id);
+            });
+            if (hero == null)
+                return Content(HttpStatusCode.NotFound, $"Id {id} does not exist");
+            return
+                Ok(hero);
         }
 
     }

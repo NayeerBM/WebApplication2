@@ -56,13 +56,13 @@ namespace WebApplication2.Modules
                 else
                 {
                     // Invalid username or password.
-                    HttpContext.Current.Response.StatusCode = 404;
+                    HttpContext.Current.Response.StatusCode = 401;
                 }
             }
             catch (FormatException)
             {
                 // Credentials were not formatted correctly.
-                HttpContext.Current.Response.StatusCode = 402;
+                HttpContext.Current.Response.StatusCode = 401;
             }
         }
 
